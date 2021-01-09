@@ -1,4 +1,4 @@
-// Personal API Key for OpenWeatherMap API
+// CHECKED AND FINSIHED - Personal API Key for OpenWeatherMap API
 
 // Event listener to add function to existing HTML DOM element
 
