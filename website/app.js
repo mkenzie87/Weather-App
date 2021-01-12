@@ -2,23 +2,35 @@
 
 // Personal API Key for OpenWeatherMap API
 // api url = api.openweathermap.org/data/2.5/forecast?zip={zip code},{country code}&appid={API key}
-let baseURL = 'api.openweathermap.org/data/2.5/forecast?zip=';
-const apiKey = '6c413c6e3c5f59807918f3a330cbc154';
-const zipCode = document.getElementById('zip').value;
+let baseURL = 'http://api.openweathermap.org/data/2.5/weather?zip=';
+const apiKey = ',us&appid=6c413c6e3c5f59807918f3a330cbc154';
 
-const myFeelings = document.getElementById('feelings').value;
+//Get the date
+let d = new Date();
+let newDate = d.getMonth() + '.' + d.getDate() + '.' + d.getFullYear();
 
-
-// Event listener to add function to existing HTML DOM element
 document.getElementById('generate').addEventListener('click', performAction);
 
 function performAction(e){
-  getAnimal(baseURL,zipCode, apiKey);
+  const zipCode = document.getElementById('zip').value;
+  const content = document.getElementById('feelings').value;
+
+  getZip(baseURL, zipCode, apiKey)
+  // New Syntax!
+  .then(function(data){
+    // Add data
+    console.log(data);
+    postData('/add', { date:newDate, temp: data.main.temp, content })
+  })
+  .then(function (newData) {
+
+        updateUI()
+      })
 }
 
-const getAnimal = async (baseURL, animal, key)=>{
+const getZip = async (baseURL, zipCode, apiKey)=>{
 
-  const res = await fetch(baseURL+animal+key)
+  const res = await fetch(baseURL + zipCode + apiKey)
   try {
 
     const data = await res.json();
@@ -30,6 +42,44 @@ const getAnimal = async (baseURL, animal, key)=>{
   }
 }
 
+const postData = async ( url = '', data = {})=>{
+    console.log(data);
+      const response = await fetch(url, {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+     // Body data type must match "Content-Type" header
+     body: JSON.stringify({
+           date: data.date,
+           temp: data.temp,
+           content: data.content
+         })
+       })
+
+      try {
+        const newData = await response.json();
+        console.log(newData);
+        return newData;
+      }catch(error) {
+      console.log("error", error);
+      }
+  }
+
+
+const updateUI = async () => {
+  const request = await fetch('/all');
+  try{
+    const allData = await request.json();
+    document.getElementById('date').innerHTML = allData[0].date;
+    document.getElementById('temp').innerHTML = allData[0].temp;
+    document.getElementById('content').innerHTML = allData[0].content;
+
+  }catch(error){
+    console.log("error", error);
+  }
+}
 
 
 
@@ -54,70 +104,21 @@ const getAnimal = async (baseURL, animal, key)=>{
 
 
 
-// const postData = async ( url = '', data = {})=>{
-//     console.log(data);
-//       const response = await fetch(url, {
-//       method: 'POST',
-//       credentials: 'same-origin',
-//       headers: {
-//           'Content-Type': 'application/json',
-//       },
-//      // Body data type must match "Content-Type" header
-//       body: JSON.stringify(data),
-//     });
-//
-//       try {
-//         const newData = await response.json();
-//         console.log(newData);
-//         return newData;
-//       }catch(error) {
-//       console.log("error", error);
-//       }
-//   }
+
+
+
+
+
+
 //
 // postData('/addWeather', {answer:42});
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-document.getElementById('generate').addEventListener('click', performAction);
-
-function performAction(e){
-  const newAnimal =  document.getElementById('animal').value;
-  const favFact =  document.getElementById('favorite').value;
-
-  getAnimal('/animalData',)
-  // New Syntax!
-  .then(function(data){
-    // Add data
-    console.log(data);
-    postData('/addAnimal', {animal:data.animal, fact: data.fact, fav:favFact} );
-  })
-  .then(
-    updateUI()
-  )
-}
-
-const updateUI = async () => {
-  const request = await fetch('/all');
-  try{
-    const allData = await request.json();
-    document.getElementById('animalName').innerHTML = allData[0].animal;
-    document.getElementById('animalFact').innerHTML = allData[0].facts;
-    document.getElementById('animalFav').innerHTML = allData[0].fav;
-
-  }catch(error){
-    console.log("error", error);
-  }
-}
+// // Event listener to add function to existing HTML DOM element
+// document.getElementById('generate').addEventListener('click', performAction);
+//
+// function performAction(e){
+//   getAnimal(baseURL,zipCode, apiKey);
+// }
