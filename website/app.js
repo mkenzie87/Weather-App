@@ -5,120 +5,79 @@
 let baseURL = 'http://api.openweathermap.org/data/2.5/weather?zip=';
 const apiKey = ',us&appid=6c413c6e3c5f59807918f3a330cbc154';
 
-//Get the date
-let d = new Date();
-let newDate = d.getMonth() + '.' + d.getDate() + '.' + d.getFullYear();
+// //Get the date
+let today = new Date();
+let dd = String(today.getDate()).padStart(2, '0');
+let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+let yyyy = today.getFullYear();
+let = newDate = mm + '/' + dd + '/' + yyyy;
 
 document.getElementById('generate').addEventListener('click', performAction);
 
-function performAction(e){
-  const zipCode = document.getElementById('zip').value;
-  const content = document.getElementById('feelings').value;
+function performAction(e) {
+  const getZip = document.getElementById('zip').value;
+  const newCon = document.getElementById('feelings').value;
 
-  getZip(baseURL, zipCode, apiKey)
-  // New Syntax!
-  .then(function(data){
-    // Add data
-    console.log(data);
-    postData('/add', { date:newDate, temp: data.main.temp, content })
-  })
-  .then(function (newData) {
-
-        updateUI()
+  getWeather(baseURL, getZip, apiKey) // this will trigger the getWeather function
+    // New Syntax!
+    .then(function(data) {
+      // Add data
+      console.log(data);
+      postData('/addWeather', {
+        date: newDate,
+        temp: data.main.temp,
+        content: newContent
       })
+    })
+    .then(function(newData) {
+
+      updateUI()
+    })
 }
 
-const getZip = async (baseURL, zipCode, apiKey)=>{
+const getWeather = async (baseURL, getZip, apiKey) => {
 
-  const res = await fetch(baseURL + zipCode + apiKey)
+  const res = await fetch(baseURL + getZip + apiKey)
   try {
 
     const data = await res.json();
     console.log(data)
     return data;
-  }  catch(error) {
+  } catch (error) {
     console.log("error", error);
     // appropriately handle the error
   }
 }
 
-const postData = async ( url = '', data = {})=>{
-    console.log(data);
-      const response = await fetch(url, {
-      method: 'POST',
-      credentials: 'same-origin',
-      headers: {
-          'Content-Type': 'application/json',
-      },
-     // Body data type must match "Content-Type" header
-     body: JSON.stringify({
-           date: data.date,
-           temp: data.temp,
-           content: data.content
-         })
-       })
+const postData = async (url = '', data = {}) => {
 
-      try {
-        const newData = await response.json();
-        console.log(newData);
-        return newData;
-      }catch(error) {
-      console.log("error", error);
-      }
+  const response = await fetch(url, {
+    method: 'POST',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data), // body data type must match "Content-Type" header
+  });
+
+  try {
+    const newData = await response.json();
+    return newData;
+  } catch (error) {
+    console.log("error", error);
   }
+};
 
 
 const updateUI = async () => {
-  const request = await fetch('/all');
-  try{
+  const request = await fetch('/allWeatherData');
+  try {
     const allData = await request.json();
-    document.getElementById('date').innerHTML = allData[0].date;
-    document.getElementById('temp').innerHTML = allData[0].temp;
-    document.getElementById('content').innerHTML = allData[0].content;
+    document.getElementById('date').innerHTML = allData.date;
+    document.getElementById('temp').innerHTML = allData.temp;
+    document.getElementById('content').innerHTML = allData.content;
 
-  }catch(error){
+  } catch (error) {
     console.log("error", error);
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
-// postData('/addWeather', {answer:42});
-
-
-
-
-// // Event listener to add function to existing HTML DOM element
-// document.getElementById('generate').addEventListener('click', performAction);
-//
-// function performAction(e){
-//   getAnimal(baseURL,zipCode, apiKey);
-// }
