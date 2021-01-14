@@ -8,3 +8,4 @@ This will require modifying the `server.js` file and the `website/app.js` file. 
 
 ## Weather App ScreenShot
 [ScreenShot For Project](docs/website/images/Weather-ScreenShot.png)
+![Alt text](website/images/Weather-Screenshot.png?raw=true "Weather App")
