@@ -7,5 +7,4 @@ This project requires you to create an asynchronous web app that uses Web API an
 This will require modifying the `server.js` file and the `website/app.js` file. You can see `index.html` for element references, and once you are finished with the project steps, you can use `style.css` to style your application to customized perfection.
 
 ## Weather App ScreenShot
-[ScreenShot For Project](docs/website/images/Weather-ScreenShot.png)
 ![Alt text](website/images/Weather-Screenshot.png?raw=true "Weather App")
