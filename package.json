@@ -1,0 +1,10 @@
+{
+  "name": "Weather App",
+  "version": "0.0.01",
+  "description": "Weather App that pulls API Data by Zipcode",
+  "dependencies": {
+    "express": "~4.16.0",
+    "cors": "~2.8.5",
+    "body-parser": "~1.19.0"
+  }
+}
