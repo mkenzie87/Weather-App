@@ -62,10 +62,10 @@ button:focus {
   grid-template-areas:
     'data-sidebar'
     'data-results';
-    webkit-transition: all 1s ease-in-out;
-    -moz-transition: all 1s ease-in-out;
-    -o-transition: all 1s ease-in-out;
-    transition: all 1s ease-in-out;
+  webkit-transition: all 1s ease-in-out;
+  -moz-transition: all 1s ease-in-out;
+  -o-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
 }
 
 #data-sidebar {
@@ -76,9 +76,9 @@ button:focus {
   justify-content: center;
   grid-area: data-sidebar;
   webkit-transition: all 1s ease-in-out;
-    -moz-transition: all 1s ease-in-out;
-    -o-transition: all 1s ease-in-out;
-    transition: all 1s ease-in-out;
+  -moz-transition: all 1s ease-in-out;
+  -o-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
 }
 
 #data-results {
@@ -93,9 +93,9 @@ button:focus {
   justify-content: center;
   grid-area: data-results;
   webkit-transition: all 1s ease-in-out;
-    -moz-transition: all 1s ease-in-out;
-    -o-transition: all 1s ease-in-out;
-    transition: all 1s ease-in-out;
+  -moz-transition: all 1s ease-in-out;
+  -o-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
 }
 
 @media screen and (max-width: 1024px) and (min-width: 769px) {
@@ -228,14 +228,13 @@ label {
 }
 
 #entryHolder {
-    margin-top: 30px;
+  margin-top: 30px;
 }
 
 @media screen and (min-width: 769px) {
-  #temp-wrapper{
+  #temp-wrapper {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas:
       'box-1 box-2 box-3';
   }
-
 }
