@@ -24,7 +24,7 @@ app.use(cors());
 app.use(express.static('website'));
 
 // Setup Server
-const port = 8000;
+const port = 4000;
 const server = app.listen(port, listening);
 
 function listening() {
@@ -46,7 +46,11 @@ app.post('/addWeather', addWeather);
 
 function addWeather(req, res) {
   projectData['date'] = req.body.date;
+  projectData['temp_desc'] = req.body.temp_desc;
+  projectData['name'] = req.body.name;
   projectData['temp'] = req.body.temp;
+  projectData['feels_like'] = req.body.feels_like;
+  projectData['temp_max'] = req.body.temp_max;
   projectData['content'] = req.body.content;
   res.send(projectData);
 }

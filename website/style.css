@@ -1,110 +1,241 @@
-body{
-    background: #fffff8;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+body {
+  background: #fffff8;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Oswald', sans-serif;
 }
 
-#app{
-    display: grid;
-    grid-auto-rows: minmax(150px, auto);
-    /* grid-template-columns:  */
-    background: #f23557;
-    color: #f0d43a;
-    justify-content: center;
-    grid-gap: 1em;
-    font-size: 20px;
-    font-family: 'Oswald', sans-serif;
-}
-
-.holder{
-
-}
-
-.entry{
-    background: rgba(59, 74, 107, .4);
-}
-
-#entryHolder{
-
-}
-
-#date{
-
-}
-
-#temp{
-
-}
-
-#content{
-
-}
-
-.headline {
-
-}
-.title{
-
-}
-
-/*  Basic Styling To Override Default For Basic HTML Elements */
-label{
-    display:block;
-    font-size: 27px;
-}
-
-input{
-    display:block;
-    height: 60px;
-    width: 320px;
-    background:#22b2da;
-    color: #f0d43a;
-    font-size: 20px;
-    font-family: 'Oswald', sans-serif;
-    border: none;
-}
-
-button{
-    width: 400px;
-    height: 100px;
-    background: #3b4a6b;
-    color: #f0d43a;
-    font-size: 26px;
-    font-family: 'Oswald', sans-serif;
-    border: none;
-    box-shadow: 2px 4px 5px #444;
-}
-h1{
-    font-size: 36px;
-}
-
-textarea{
-    background:#22b2da;
-    color: #f0d43a;
-    font-size: 20px;
-    font-family: 'Oswald', sans-serif;
-}
 /* Reset style for HTML element on active to have no border*/
 input:focus,
 select:focus,
 textarea:focus,
 button:focus {
-    outline: none;
-}
-/* Style for Placeholder Text*/
-::placeholder { /* Firefox, Chrome, Opera */
-    color: #f0d43a;
-    font-family: 'Oswald', sans-serif;
-
+  outline: none;
 }
 
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: #f0d43a;
-    font-family: 'Oswald', sans-serif;
-
+/*==============================
+      PLACEHOLDER TEXT STYLE
+================================*/
+::placeholder {
+  /* Firefox, Chrome, Opera */
+  color: #569374;
+  font-family: 'Oswald', sans-serif;
+  font-style: italic;
 }
 
-::-ms-input-placeholder { /* Microsoft Edge */
-    color: #f0d43a;
-    font-family: 'Oswald', sans-serif;
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #569374;
+  font-family: 'Oswald', sans-serif;
+  font-style: italic;
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #569374;
+  font-family: 'Oswald', sans-serif;
+  font-style: italic;
+}
+
+/*==============================
+          GLOBAL DETAILS
+================================*/
+.headline,
+.title {
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+  margin-top: 0;
+  line-height: 1;
+}
+
+.headline span,
+.title span {
+  font-weight: 300;
+}
+
+/*==============================
+          GRID DETAILS
+================================*/
+#app {
+  display: grid;
+  font-family: 'Oswald', sans-serif;
+  grid-template-areas:
+    'data-sidebar'
+    'data-results';
+    webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+}
+
+#data-sidebar {
+  padding: 60px 30px;
+  background: #a8d1b5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  grid-area: data-sidebar;
+  webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+}
+
+#data-results {
+  background: green;
+  height: 100vh;
+  background-image: url(/images/tropical-leaf-background.jpg);
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  grid-area: data-results;
+  webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+}
+
+@media screen and (max-width: 1024px) and (min-width: 769px) {
+  #app {
+    grid-template-columns: 300px 1fr;
+    height: 100vh;
+    grid-template-areas:
+      'data-sidebar data-results';
+  }
+
+  #data-sidebar {
+    border-right: 3px solid #fff;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  #app {
+    grid-template-columns: 400px 1fr;
+    height: 100vh;
+    grid-template-areas:
+      'data-sidebar data-results';
+  }
+
+  #data-sidebar {
+    border-right: 5px solid #fff;
+  }
+}
+
+/*==============================
+          FORM DETAILS
+================================*/
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+#zip {
+  width: 100%;
+  height: 45px;
+  border: none;
+  margin-bottom: 15px;
+}
+
+#feelings {
+  width: 100%;
+  border: none;
+}
+
+#generate {
+  display: block;
+  width: 100%;
+  border: none;
+  padding: 16px 20px;
+  text-transform: uppercase;
+  font-weight: 700;
+  background: #133e30;
+  color: #fff;
+  margin-top: 8px;
+}
+
+#generate:hover {
+  background: #000;
+  cursor: pointer;
+}
+
+/*==============================
+       ENTRY DETAILS
+================================*/
+.entry {
+  background: black;
+  background: rgba(0, 0, 0, .34);
+  color: #fff;
+  padding: 30px;
+  width: 80%;
+}
+
+.degree {
+  font-size: 50px;
+}
+
+.degree::after {
+  content: "\00B0"
+}
+
+#temp_desc {
+  text-transform: capitalize;
+}
+
+#location {
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+#temp-wrapper {
+  display: grid;
+  margin: 20px 0;
+  grid-template-areas:
+    'box-1'
+    'box-2'
+    'box-3';
+}
+
+.temp-font {
+  margin-top: 0;
+}
+
+.box-1 {
+  grid-area: box-1;
+}
+
+.box-2 {
+  grid-area: box-2;
+}
+
+.box-3 {
+  grid-area: box-3;
+}
+
+.title {
+  display: inline;
+}
+
+#date {
+  display: inline;
+  font-size: 1.5em;
+}
+
+#date::before {
+  content: "- ";
+}
+
+#entryHolder {
+    margin-top: 30px;
+}
+
+@media screen and (min-width: 769px) {
+  #temp-wrapper{
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas:
+      'box-1 box-2 box-3';
+  }
 
 }

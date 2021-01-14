@@ -10,25 +10,45 @@
 
 <body>
   <div id="app">
-    <div class="holder headline">
-      Weather Journal App
+    <div id="data-sidebar">
+      <div class="holder">
+        <h1 class="headline"><span>Weather</span> Journal App</h1>
+      </div>
+      <div class="holder zip">
+        <label for="zip">Enter Zipcode here</label>
+        <input type="text" id="zip" placeholder="enter zip code here">
+      </div>
+      <div class="holder feel">
+        <label for="feelings">How are you feeling today?</label>
+        <textarea class="myInput" id="feelings" placeholder="Enter your feelings here" rows="9" cols="50"></textarea>
+        <button id="generate" type="submit"> Generate </button>
+      </div>
     </div>
-    <div class="holder zip">
-      <label for="zip">Enter Zipcode here</label>
-      <input type="text" id="zip" placeholder="enter zip code here">
-    </div>
-    <div class="holder feel">
-      <label for="feelings">How are you feeling today?</label>
-      <textarea class="myInput" id="feelings" placeholder="Enter your feelings here" rows="9" cols="50"></textarea>
-      <button id="generate" type="submit"> Generate </button>
-    </div>
-    <div class="holder entry">
-      <div class="title">Most Recent Entry</div>
+
+    <div id="data-results">
+      <div id="entry-wrapper"class="holder entry" style="display: none;">
+      <h2 class="title"><span>Most</span> Recent Entry</h2>
+      <div id="date"></div>
       <div id="entryHolder">
-        <div id="date"></div>
-        <div id="temp"></div>
+        <div id="location"></div>
+        <div id="temp_desc"></div>
+        <div id="temp-wrapper">
+          <div class="temp-box box-1">
+            <div id="temp" class="degree"></div>
+            <p class="temp-font">Current Temp</p>
+          </div>
+          <div class="temp-box box-2">
+            <div id="feels-like" class="degree"></div>
+            <p class="temp-font">Feels Like</p>
+          </div>
+          <div class="temp-box box-3">
+            <div id="max-temp" class="degree"></div>
+            <p class="temp-font">Max Temp</p>
+          </div>
+        </div>
         <div id="content"></div>
       </div>
+    </div>
     </div>
   </div>
   <script src="app.js" type="text/javascript"></script>

@@ -3,7 +3,7 @@
 // Personal API Key for OpenWeatherMap API
 // api url = api.openweathermap.org/data/2.5/forecast?zip={zip code},{country code}&appid={API key}
 let baseURL = 'http://api.openweathermap.org/data/2.5/weather?zip=';
-const apiKey = ',us&appid=6c413c6e3c5f59807918f3a330cbc154';
+const apiKey = ',us&units=imperial&appid=6c413c6e3c5f59807918f3a330cbc154';
 
 // //Get the date
 let today = new Date();
@@ -16,7 +16,8 @@ document.getElementById('generate').addEventListener('click', performAction);
 
 function performAction(e) {
   const getZip = document.getElementById('zip').value;
-  const newCon = document.getElementById('feelings').value;
+  const newContent = document.getElementById('feelings').value;
+  const entry = document.getElementById('entry-wrapper').style.display = "block";
 
   getWeather(baseURL, getZip, apiKey) // this will trigger the getWeather function
     // New Syntax!
@@ -25,7 +26,11 @@ function performAction(e) {
       console.log(data);
       postData('/addWeather', {
         date: newDate,
+        name: data.name,
         temp: data.main.temp,
+        feels_like: data.main.feels_like,
+        temp_max: data.main.temp_max,
+        temp_desc: data.weather[0].description,
         content: newContent
       })
     })
@@ -74,7 +79,11 @@ const updateUI = async () => {
   try {
     const allData = await request.json();
     document.getElementById('date').innerHTML = allData.date;
+    document.getElementById('location').innerHTML = allData.name;
+    document.getElementById('temp_desc').innerHTML = allData.temp_desc;
     document.getElementById('temp').innerHTML = allData.temp;
+    document.getElementById('feels-like').innerHTML = allData.feels_like;
+    document.getElementById('max-temp').innerHTML = allData.temp_max;
     document.getElementById('content').innerHTML = allData.content;
 
   } catch (error) {
